@@ -77,6 +77,8 @@ desktop.ini
 # Temporary files & local execution logs
 *.log
 *.tmp
+~$*
 scratch/
 .system_generated/
+
 
