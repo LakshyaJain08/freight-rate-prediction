@@ -73,7 +73,16 @@ The scorer validates both files and creates `scorer_results/candidate_december.p
 ├── train_and_predict.ipynb        # Interactive notebook with EDA & XAI
 ├── score.py                       # Assessment validation & scoring script
 ├── report.md                      # Comprehensive methodology & XAI report
+├── report.docx                    # Formatted executive report document
 ├── requirements.txt               # Project dependencies
 └── .gitignore                     # Git ignore rules
 ```
+
+## Methodology Highlights
+
+- **Time-Based Validation**: Data is chronologically partitioned (Train: Jan–Sep [43,147 loads], Validation: Oct [4,853 loads]) to strictly prevent lookahead leakage in time-series spot rate prediction.
+- **Leakage-Free Imputation**: Outlier-resistant median imputer fit strictly on training data handles missing values and aligns the December inference schema.
+- **XGBoost Categorical Partitioning**: Leverages `enable_categorical=True` to directly model 64 unique pickup/delivery hubs and equipment types without dimensionality explosion.
+- **Explainable AI (XAI)**: Native C++ TreeSHAP integration provides global beeswarm feature impacts and load-level waterfall attribution.
+
 
