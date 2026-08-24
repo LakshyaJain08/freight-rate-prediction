@@ -72,3 +72,11 @@ venv.bak/
 *~
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# Temporary files & local execution logs
+*.log
+*.tmp
+scratch/
+.system_generated/
+
