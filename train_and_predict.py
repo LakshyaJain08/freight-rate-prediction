@@ -89,14 +89,15 @@ def main():
     
     print(f"Training on {len(train_split)} rows, validating on {len(val_split)} rows...")
     
+    # Configure XGBoost regressor with robust regularization parameters
     model = xgb.XGBRegressor(
-        n_estimators=300,
-        learning_rate=0.05,
-        max_depth=6,
-        subsample=0.8,
-        colsample_bytree=0.8,
-        enable_categorical=True,
-        random_state=42
+        n_estimators=300,        # 300 boosting rounds for convergence
+        learning_rate=0.05,      # Conservative step size shrinkage
+        max_depth=6,             # 6 levels of interaction depth
+        subsample=0.8,           # 80% row subsampling per tree (stochastic boosting)
+        colsample_bytree=0.8,    # 80% feature subsampling per split
+        enable_categorical=True, # Native experimental categorical partitioning
+        random_state=42          # Deterministic seed for reproducibility
     )
     
     model.fit(
