@@ -110,8 +110,13 @@ def main():
     val_preds = model.predict(X_val_split)
     rmse = np.sqrt(mean_squared_error(y_val_split, val_preds))
     mae = mean_absolute_error(y_val_split, val_preds)
-    print(f"Validation RMSE: {rmse:.2f}")
-    print(f"Validation MAE: {mae:.2f}")
+    
+    print("\n" + "=" * 45)
+    print("  OCTOBER HOLDOUT VALIDATION PERFORMANCE")
+    print("=" * 45)
+    print(f"  • Validation RMSE : ${rmse:,.2f}")
+    print(f"  • Validation MAE  : ${mae:,.2f}")
+    print("=" * 45 + "\n")
     
     import os
     os.makedirs('output', exist_ok=True)
