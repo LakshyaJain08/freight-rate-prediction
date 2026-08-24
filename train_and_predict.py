@@ -1,3 +1,4 @@
+from typing import Tuple, List
 import pandas as pd
 import numpy as np
 import xgboost as xgb
@@ -5,17 +6,32 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.impute import SimpleImputer
 import matplotlib.pyplot as plt
 
-def load_data():
-    """Loads the training, validation, and December datasets."""
+def load_data() -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """
+    Loads the historical training, validation, and December evaluation datasets.
+    
+    Returns:
+        Tuple containing (train_df, val_df, dec_df) as pandas DataFrames.
+    """
     train_df = pd.read_csv('train-test.csv')
     val_df = pd.read_csv('validation.csv')
     dec_df = pd.read_csv('december-chart-inputs.csv')
     return train_df, val_df, dec_df
 
-def engineer_features(df, is_december=False):
+def engineer_features(df: pd.DataFrame, is_december: bool = False) -> pd.DataFrame:
     """
-    Applies feature engineering to the dataset.
-    Extracts date components and ensures necessary columns are present.
+    Applies feature engineering transformations to freight data.
+    
+    Extracts temporal components (month, day of week, day of month),
+    casts categorical columns for native tree partitioning, and
+    generates placeholder NaN columns for December inference.
+    
+    Args:
+        df: Input freight dataframe.
+        is_december: Flag indicating if the dataset is the December inference partition.
+        
+    Returns:
+        Transformed DataFrame with engineered feature columns.
     """
     df = df.copy()
     
